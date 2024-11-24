@@ -1,12 +1,13 @@
+import Logo from "../assets/images/Obsidian.png";
+
 const Navigation = () => {
     return (
-        <div className={"retro-container tw-w-full tw-fixed tw-top-0 tw-left-0"}>
-            <div className={"tw-flex tw-flex-row tw-justify-between tw-h-full tw-relative"}>
+        <div className={"tw-w-full tw-fixed tw-top-0 tw-left-0 tw-border-b-4 tw-border-b-obsidianPink tw-min-h-[5rem] tw-flex tw-items-center tw-bg-background"}>
+            <div className={"tw-flex tw-flex-row tw-justify-between tw-h-full"}>
                 <div className={"tw-h-full tw-gap-y-0"}>
-                    <h2 className={"tw-text-2xl"}> Welcome to </h2>
-                    <h2 className={"tw-text-4xl"}> Obsidian Cleaning</h2>
+                    <img src={Logo} className={"tw-w-3/4"} alt={'Obsidian Logo'}/>
                 </div>
-                <div className={"tw-h-full tw-flex tw-gap-x-3 tw-absolute tw-right-0 tw-items-end"}>
+                <div className={"tw-font-header tw-w-full tw-flex tw-gap-x-3 tw-text-sm tw-justify-between tw-align-bottom tw-items-end tw-px-6"}>
                     <a>
                         Home
                     </a>
@@ -14,7 +15,7 @@ const Navigation = () => {
                         Services
                     </a>
                     <a>
-                        About Us
+                        About
                     </a>
                     <a>
                         Contact

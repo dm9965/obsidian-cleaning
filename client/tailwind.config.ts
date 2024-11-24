@@ -7,7 +7,16 @@ const config: Config = {
         "./src/**/*.{js,ts,jsx,tsx}",
     ],
     theme: {
-        extend: {},
+        colors: {
+            obsidianPink: "#ff50da",
+            background: "#101b41",
+        },
+        extend: {
+            fontFamily: {
+                header: ["Megabomb", "sans-serif"],
+            },
+
+        },
     },
     plugins: [],
 }

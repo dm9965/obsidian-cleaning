@@ -1,11 +1,10 @@
 :root {
-  font-family: "VT323", monospace;
   font-weight: 400;
-  --primary-color: #81d839;
+  --primary-color: #17a0b9;
   --secondary-color: #353230;
-  --tertiary-color: #c72d04;
-  --background-color: #111;
-  scrollbar-color: var(--primary-color) var(--secondary-color);
+  --tertiary-color: #ff50da;
+  --background-color: #101b41;
+  scrollbar-color: var(--primary-color) var(--tertiary-color);
   font-size: clamp(18px, 3vw, 30px);
 }
 
@@ -13,24 +12,21 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
 }
 
 body {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
   height: 100vh;
   background-color: var(--background-color);
-}
-
-div.retro-container {
-  overflow: hidden;
-  padding: 0.5rem;
-  border: 2px solid var(--primary-color);
-  color: var(--primary-color);
-  mask-image: linear-gradient(to bottom, #0005 50%, #000 50%);
-  mask-size: 100% 2px;
-  text-shadow: 0 0 0.5rem;
+  background-size: 40px 40px; /* Set grid cell size */
+  background-image:
+          linear-gradient(to right, rgba(00, 0, 0.3), var(--primary-color) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(00, 0, 0.3), var(--primary-color) 1px, transparent 1px);
+  background-repeat: repeat;
 }
 
 header,
@@ -53,4 +49,11 @@ section {
   height: 100%;
   overflow: hidden auto;
   margin: 1rem 0;
+}
+
+@font-face {
+  font-family: 'Megabomb';
+  src: url("../fonts/Megabomb.ttf") format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }

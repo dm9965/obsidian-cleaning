@@ -1,14 +1,14 @@
 import './assets/stylesheets/App.css'
+import Navigation from "./components/Navigation.tsx";
 
 function App() {
-  const hello = 'hello'
-
   return (
-    <>
-        <p className={"tw-text-2xl tw-text-amber-400 tw-font-bold"}>
-            Hello Ryan
-        </p>
-    </>
+      <div className={"tw-w-lvw tw-p-3"}>
+          <Navigation />
+          <div className={"retro-container tw-w-full tw-p-6"}>
+              <h2 className={"tw-text-2xl"}> Services </h2>
+          </div>
+      </div>
   )
 }
 

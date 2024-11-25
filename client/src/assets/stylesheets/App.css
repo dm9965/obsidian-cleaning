@@ -19,7 +19,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  overflow: auto;
   height: 100vh;
   background-color: var(--background-color);
   background-size: 40px 40px; /* Set grid cell size */
@@ -34,10 +34,6 @@ footer {
   display: flex;
   gap: 2rem;
   align-items: center;
-}
-
-main {
-  overflow: hidden;
 }
 
 a {

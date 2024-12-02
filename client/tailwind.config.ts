@@ -8,8 +8,11 @@ const config: Config = {
     ],
     theme: {
         colors: {
-            obsidianPink: "#ff50da",
-            background: "#101b41",
+            "primary-orange": "#f16806",
+            "primary-blue": "#1745b9",
+            "primary-dark-blue": "#052d90",
+            "primary-black": "#171717",
+            "primary-white": "#dedede",
         },
         extend: {
             fontFamily: {

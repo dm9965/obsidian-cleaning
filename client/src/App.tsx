@@ -18,10 +18,10 @@ function App() {
     }, [])
 
     return (
-      <div id={'fade-in'}
-           className={"tw-w-lvw tw-p-3 tw-opacity-0 tw-transition-opacity tw-duration-1000 tw-ease-in tw-flex tw-flex-col "}>
+      <body id={'fade-in'}
+           className={"tw-w-lvw tw-opacity-0 tw-transition-opacity tw-duration-1000 tw-ease-in tw-flex tw-flex-col tw-justify-start"}>
            <Navigation/>
-           <div className={"tw-flex tw-flex-col"}>
+           <div className={"tw-flex tw-flex-col tw-w-full"}>
               <BrowserRouter>
                  <Routes>
                     <Route path={"/"} element={<LandingPage/>}/>
@@ -32,7 +32,7 @@ function App() {
                  </Routes>
               </BrowserRouter>
            </div>
-        </div>
+        </body>
     )
 }
 

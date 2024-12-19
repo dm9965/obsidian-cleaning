@@ -16,7 +16,7 @@ const config: Config = {
         },
         extend: {
             fontFamily: {
-                header: ["Megabomb", "sans-serif"],
+                poppins: ["Poppins", "sans-serif"],
             },
 
         },

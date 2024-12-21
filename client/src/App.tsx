@@ -1,12 +1,13 @@
 import './assets/stylesheets/App.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from "./components/Navigation.tsx";
 import {useEffect} from "react";
 import {BrowserRouter, Route, Routes} from "react-router";
 import LandingPage from "./components/LandingPage.tsx";
-import Locations from "./components/Locations.tsx";
-import MoreInfo from "./components/MoreInfo.tsx";
-import Reviews from "./components/Reviews.tsx";
+import Estimates from "./components/Estimates.tsx";
+import About from "./components/About.tsx";
 import Services from "./components/Services.tsx";
+import Footer from "./components/Footer.tsx";
 
 
 function App() {
@@ -18,20 +19,20 @@ function App() {
     }, [])
 
     return (
-      <body id={'fade-in'}
-           className={"tw-w-lvw tw-opacity-0 tw-transition-opacity tw-duration-1000 tw-ease-in tw-flex tw-flex-col tw-justify-start"}>
+      <body
+           className={"tw-w-lvw tw-overflow-y-scroll tw-flex tw-flex-col tw-justify-start"}>
            <Navigation/>
-           <div className={"tw-flex tw-flex-col tw-w-full"}>
+           <div id={'fade-in'} className={"tw-flex tw-flex-col tw-w-full  tw-opacity-0 tw-transition-opacity tw-duration-500 tw-ease-in"}>
               <BrowserRouter>
                  <Routes>
                     <Route path={"/"} element={<LandingPage/>}/>
                     <Route path={"/Services"} element={<Services/>}/>
-                    <Route path={"/Locations"} element={<Locations/>}/>
-                    <Route path={"/MoreInfo"} element={<MoreInfo/>}/>
-                    <Route path={"/Reviews"} element={<Reviews/>}/>
+                    <Route path={"/About"} element={<About/>}/>
+                    <Route path={"/Estimates"} element={<Estimates/>}/>
                  </Routes>
               </BrowserRouter>
            </div>
+           <Footer/>
         </body>
     )
 }

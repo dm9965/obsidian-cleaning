@@ -1,5 +1,5 @@
 :root {
-  font-weight: 400;
+  font-weight: 700;
   --primary-color: #1745b9;
   --secondary-color: #f16806;
   --tertiary-color: #171717;
@@ -12,6 +12,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+p, Input, Label  {
+  font-size: .65rem;
+  font-weight: normal;
+  font-family: "Avenir", sans-serif;
 }
 
 body {
@@ -38,11 +44,4 @@ section {
   height: 100%;
   overflow: hidden auto;
   margin: 1rem 0;
-}
-
-@font-face {
-  font-family: 'Megabomb';
-  src: url("../fonts/Megabomb.ttf") format('truetype');
-  font-weight: normal;
-  font-style: normal;
 }

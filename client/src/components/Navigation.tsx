@@ -5,41 +5,40 @@ import { FaPhone } from "react-icons/fa";
 const Navigation = () => {
     return (
         <header
-            className={"tw-w-full tw-shadow-lg tw-flex tw-flex-col tw-items-center tw-bg-primary-white"}>
+            className={"tw-w-full tw-z-1 tw-flex tw-flex-col tw-items-center tw-bg-primary-dark-blue"}>
             <div className={"tw-flex tw-w-full tw-items-start tw-justify-between"}>
-                <img src={Logo} className={"tw-w-48 tw-p-2 tw-"} alt={'Obsidian Logo'}/>
-                <div
-                    className={"tw-text-primary-dark-blue tw-h-full tw-font-poppins tw-flex tw-justify-center tw-items-center tw-gap-x-6 tw-px-3"}>
-                    <div>
-                        <div className={"tw-flex tw-items-center tw-text-[.5rem] tw-leading-tight"}>
+                <img src={Logo} className={"tw-w-48 tw-p-2"} alt={'Obsidian Logo'}/>
+                <div className={"tw-text-primary-white tw-h-full tw-font-poppins tw-flex tw-justify-center tw-items-center tw-gap-x-6 tw-mt-3 tw-px-6"}>
+                    <div className={"tw-flex tw-flex-col tw-items-start"}>
+                        <div className={"tw-flex tw-text-sm tw-items-center"}>
                             <FaPhone className={"tw-fill-primary-orange"}/>
-                            <p className={"tw-pl-1"}> Call Us! </p>
+                            <div className={"tw-pl-1"}> Call Us! </div>
                         </div>
-                        <p className={"tw-font-bold tw-text-xs"}>585-555-5555</p>
+                        <p className={"tw-font-bold tw-text-sm"}>585-555-5555</p>
                     </div>
                     <div>
-                        <div className={"tw-flex tw-items-center tw-text-[.5rem] tw-leading-tight"}>
+                        <div className={"tw-flex tw-text-sm tw-items-center"}>
                             <FaMapMarkerAlt className={"tw-fill-primary-orange"}/>
-                            <p className={"tw-pl-1"}> Service Area </p>
+                            <div className={"tw-pl-1"}> Service Area </div>
                         </div>
-                        <p className={"tw-font-bold tw-text-xs"}>Rochester, NY</p>
+                        <p className={"tw-font-bold tw-text-sm"}>Rochester, NY</p>
                     </div>
                 </div>
             </div>
             <div className={"tw-bg-primary-dark-blue tw-w-full tw-flex tw-justify-center"}>
                 <div
-                    className={"tw-flex tw-font-poppins tw-font-semibold tw-w-3/4 tw-gap-x-3 tw-text-xs tw-justify-between tw-p-2"}>
-                    <a>
+                    className={"tw-flex tw-font-poppins tw-font-semibold tw-w-full tw-px-6 tw-gap-x-3 tw-items-center tw-text-xs tw-justify-between tw-p-2 tw-h-[2rem]"}>
+                    <a href={"/"} className={"hover:tw-border-b-2 hover:tw-border-b-primary-orange tw-text-[.75rem] tw-text-primary-white tw-no-underline"}>
                         Home
                     </a>
-                    <a>
+                    <a href={"/Services"} className={"hover:tw-border-b-2 hover:tw-border-b-primary-orange tw-text-[.75rem] tw-text-primary-white tw-no-underline"}>
                         Services
                     </a>
-                    <a>
-                        About
+                    <a href={"/Estimates"} className={"hover:tw-border-b-2 hover:tw-border-b-primary-orange tw-text-[.75rem] tw-text-primary-white tw-no-underline"}>
+                        Get an Estimate
                     </a>
-                    <a>
-                        Contact
+                    <a href={"/About"} className={"hover:tw-border-b-2 hover:tw-border-b-primary-orange tw-text-[.75rem] tw-text-primary-white tw-no-underline"}>
+                        About
                     </a>
                 </div>
             </div>

@@ -6,7 +6,7 @@ import ObsidianButton from "./ObsidianButton.tsx";
 
 const Footer = () => {
     return (
-        <div className={"tw-bg-primary-dark-blue tw-text-primary-white tw-w-full tw-p-6"}>
+        <div className={"xs:tw-mt-0 md:tw-mt-10 tw-bg-primary-dark-blue tw-text-primary-white tw-w-full tw-p-6"}>
             <div className={"tw-grid tw-grid-cols-3 tw-gap-x-4"}>
                 <div>
                     <div className={"tw-flex tw-gap-x-2"}>

@@ -10,16 +10,16 @@ const LandingPage = () => {
     const navigate = useNavigate();
 
     return (
-        <div className={""}>
+        <div className={"tw-flex tw-flex-col tw-justify-between tw-h-full"}>
             <div className={"tw-relative"}>
                 <img src={Stock} className={"tw-w-full tw-brightness-75"}/>
-                <div className={"tw-absolute tw-left-10 tw-top-20 tw-font-poppins"}>
-                    <h3 className={"tw-font-bold tw-w-3/5 tw-text-primary-white tw-pb-3"}> Professional Cleaning Service since 2019 </h3>
+                <div className={"tw-absolute tw-left-10 xs:tw-top-7 md:tw-top-20 tw-font-poppins"}>
+                    <h3 className={"tw-font-bold tw-w-3/5 tw-text-primary-white tw-pb-3 xs:tw-text-md"}> Professional Cleaning Service since 2019 </h3>
                     <ObsidianButton> Get Started </ObsidianButton>
                 </div>
             </div>
             <div className={"tw-flex tw-flex-row tw-py-3 tw-text-primary-dark-blue tw-font-poppins"}>
-                <div className={"tw-grid tw-grid-cols-2 tw-p-6 tw-text-xs"}>
+                <div className={"xs:tw-hidden md:tw-grid tw-grid-cols-2 tw-p-6 tw-text-xs"}>
                     <div className={"tw-flex tw-flex-col tw-items-center"}>
                         <p className={"tw-font-semibold tw-leading-tight"}>Offices</p>
                         <div
@@ -66,6 +66,11 @@ const LandingPage = () => {
                         </ObsidianButton>
                     </div>
                 </div>
+            </div>
+            <div className={"xs:tw-flex md:tw-hidden tw-w-full tw-bg-primary-orange tw-p-3"}>
+                <p className={"tw-text-md tw-text-center tw-p-0 tw-m-0"}>Call us today for a free estimate at
+                   585-555-5555
+                </p>
             </div>
         </div>
     )

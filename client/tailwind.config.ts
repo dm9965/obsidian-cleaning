@@ -7,6 +7,14 @@ const config: Config = {
         "./src/**/*.{js,ts,jsx,tsx}",
     ],
     theme: {
+        screens: {
+            xs: "320px",
+            sm: "640px",
+            md: "768px",
+            lg: "1024px",
+            xl: "1280px",
+            xxl: "1600px",
+        },
         colors: {
             "primary-orange": "#f16806",
             "primary-blue": "#1745b9",
@@ -20,7 +28,7 @@ const config: Config = {
         fontSize: {
             xs: ".6rem",
             sm: ".7rem",
-            tiny: ".875rem",
+            md: ".875rem",
             base: "1rem",
             lg: "1.125rem",
             xl: "1.25rem",

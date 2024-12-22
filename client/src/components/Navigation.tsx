@@ -1,14 +1,24 @@
 import Logo from "../assets/images/ObsidianNew.png";
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { FaPhone } from "react-icons/fa";
+import {Collapse, Nav, Navbar, NavbarToggler, NavItem} from "reactstrap";
+import {useState} from "react";
+import {useNavigate} from "react-router";
 
 const Navigation = () => {
+    const [menuOpen, setMenuOpen] = useState(false);
+    const toggleNav = () => {
+        setMenuOpen(!menuOpen);
+    }
+
+    // const navigate = useNavigate();
+
     return (
-        <header
-            className={"tw-w-full tw-z-1 tw-flex tw-flex-col tw-items-center tw-bg-primary-dark-blue"}>
+        <Navbar
+            className={"tw-w-full tw-z-1 tw-flex tw-flex-col tw-items-center tw-bg-primary-dark-blue tw-shadow-lg tw-relative"}>
             <div className={"tw-flex tw-w-full tw-items-start tw-justify-between"}>
                 <img src={Logo} className={"tw-w-48 tw-p-2"} alt={'Obsidian Logo'}/>
-                <div className={"tw-text-primary-white tw-h-full tw-font-poppins tw-flex tw-justify-center tw-items-center tw-gap-x-6 tw-mt-3 tw-px-6"}>
+                <div className={"tw-text-primary-white tw-h-full tw-font-poppins xs:tw-hidden md:tw-flex tw-justify-center tw-items-center tw-gap-x-6 tw-mt-3 tw-px-6"}>
                     <div className={"tw-flex tw-flex-col tw-items-start"}>
                         <div className={"tw-flex tw-text-sm tw-items-center"}>
                             <FaPhone className={"tw-fill-primary-orange"}/>
@@ -24,17 +34,53 @@ const Navigation = () => {
                         <p className={"tw-font-bold tw-text-sm"}>Rochester, NY</p>
                     </div>
                 </div>
+                {window.innerWidth < 500 && (
+                    <div className={"tw-p-3"}>
+                        <NavbarToggler
+                            style={{
+                                position: "absolute",
+                                right: "1rem", // Adjust based on your design
+                                top: "1rem",   // Adjust based on your design
+                            }}
+                            onClick={toggleNav}
+                            navbar
+                        />
+                        <Collapse isOpen={menuOpen} className={"tw-absolute tw-z-10 tw-bg-primary-white tw-border tw-border-primary-gray tw-shadow-lg tw-p-3 tw-pl-6 tw-rounded-lg tw-right-2 tw-mt-10"} navbar>
+                            <Nav navbar className={"ms-auto tw-flex tw-flex-col tw-items-end tw-gap-y-2"}>
+                                <a href={"/"}
+                                   className={"hover:tw-border-b-2 hover:tw-border-b-primary-orange tw-text-md tw-text-primary-dark-blue tw-font-medium tw-no-underline"}>
+                                    Home
+                                </a>
+                                <a href={"/Services"}
+                                   className={"hover:tw-border-b-2 hover:tw-border-b-primary-orange tw-text-md tw-text-primary-dark-blue tw-font-medium  tw-no-underline"}>
+                                    Services
+                                </a>
+                                <a href={"/Estimates"}
+                                   className={"hover:tw-border-b-2 hover:tw-border-b-primary-orange tw-text-md tw-text-primary-dark-blue tw-font-medium  tw-no-underline"}>
+                                    Get an Estimate
+                                </a>
+                                <a href={"/About"}
+                                   className={"hover:tw-border-b-2 hover:tw-border-b-primary-orange tw-text-md tw-text-primary-dark-blue tw-font-medium  tw-no-underline"}>
+                                    About
+                                </a>
+                            </Nav>
+                        </Collapse>
+                    </div>
+                )}
             </div>
-            <div className={"tw-bg-primary-dark-blue tw-w-full tw-flex tw-justify-center"}>
+            <div className={"tw-bg-primary-dark-blue tw-w-full xs:tw-hidden md:tw-flex tw-justify-center"}>
                 <div
                     className={"tw-flex tw-font-poppins tw-font-semibold tw-w-full tw-px-6 tw-gap-x-3 tw-items-center tw-text-xs tw-justify-between tw-p-2 tw-h-[2rem]"}>
-                    <a href={"/"} className={"hover:tw-border-b-2 hover:tw-border-b-primary-orange tw-text-[.75rem] tw-text-primary-white tw-no-underline"}>
+                    <a href={"/"}
+                       className={"hover:tw-border-b-2 hover:tw-border-b-primary-orange tw-text-[.75rem] tw-text-primary-white tw-no-underline"}>
                         Home
                     </a>
-                    <a href={"/Services"} className={"hover:tw-border-b-2 hover:tw-border-b-primary-orange tw-text-[.75rem] tw-text-primary-white tw-no-underline"}>
+                    <a href={"/Services"}
+                       className={"hover:tw-border-b-2 hover:tw-border-b-primary-orange tw-text-[.75rem] tw-text-primary-white tw-no-underline"}>
                         Services
                     </a>
-                    <a href={"/Estimates"} className={"hover:tw-border-b-2 hover:tw-border-b-primary-orange tw-text-[.75rem] tw-text-primary-white tw-no-underline"}>
+                    <a href={"/Estimates"}
+                       className={"hover:tw-border-b-2 hover:tw-border-b-primary-orange tw-text-[.75rem] tw-text-primary-white tw-no-underline"}>
                         Get an Estimate
                     </a>
                     <a href={"/About"} className={"hover:tw-border-b-2 hover:tw-border-b-primary-orange tw-text-[.75rem] tw-text-primary-white tw-no-underline"}>
@@ -42,7 +88,7 @@ const Navigation = () => {
                     </a>
                 </div>
             </div>
-        </header>
+        </Navbar>
     )
 }
 

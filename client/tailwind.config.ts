@@ -12,7 +12,10 @@ const config: Config = {
             "primary-blue": "#1745b9",
             "primary-dark-blue": "#052d90",
             "primary-black": "#171717",
-            "primary-white": "#dedede",
+            "primary-gray": "#d3d3d3",
+            "primary-white": "#FFFFFF",
+            "success": "#369d2a",
+            "error": "#d03c3c",
         },
         fontSize: {
             xs: ".6rem",

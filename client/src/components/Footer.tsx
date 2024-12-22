@@ -7,7 +7,7 @@ import ObsidianButton from "./ObsidianButton.tsx";
 const Footer = () => {
     return (
         <div className={"tw-bg-primary-dark-blue tw-text-primary-white tw-w-full tw-p-6"}>
-            <div className={"tw-grid tw-grid-cols-3 tw-gap-x-4 tw-pb-4"}>
+            <div className={"tw-grid tw-grid-cols-3 tw-gap-x-4"}>
                 <div>
                     <div className={"tw-flex tw-gap-x-2"}>
                         <h4 className={"tw-font-semibold tw-text-sm tw-font-poppins"}>About Us</h4>
@@ -54,7 +54,7 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-            <hr className={"tw-pt-4"}/>
+            <hr/>
             <p className={"tw-text-center tw-text-xs"}> &copy; All Rights Reserved. Obsidian Cleaning Service.</p>
         </div>
     )

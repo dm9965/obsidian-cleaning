@@ -16,7 +16,7 @@ const Footer = () => {
                     <div>
                         <p className={"tw-leading-tight"}>Obsidian is a local, family-owned company since 2019. Click below to learn more!</p>
                     </div>
-                    <ObsidianButton>
+                    <ObsidianButton onClick={() => (window.location.href = "About")}>
                         About Us
                     </ObsidianButton>
                 </div>

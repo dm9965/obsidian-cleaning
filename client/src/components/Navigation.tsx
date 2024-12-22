@@ -3,7 +3,6 @@ import { FaMapMarkerAlt } from 'react-icons/fa';
 import { FaPhone } from "react-icons/fa";
 import {Collapse, Nav, Navbar, NavbarToggler, NavItem} from "reactstrap";
 import {useState} from "react";
-import {useNavigate} from "react-router";
 
 const Navigation = () => {
     const [menuOpen, setMenuOpen] = useState(false);

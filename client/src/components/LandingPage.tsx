@@ -57,8 +57,8 @@ const LandingPage = () => {
                         be your one stop shop to keep your business looking its best! Call today for a free estimate, or get an estimate below! Don't forget to check out
                         all of the services we offer!
                     </p>
-                    <div className={"tw-w-full tw-flex tw-justify-around tw-text-primary-white"}>
-                        <ObsidianButton onClick={() => navigate("/Services") }>
+                    <div className={"tw-w-full tw-flex md:tw-flex-col tw-gap-2 lg:tw-flex-row tw-justify-around tw-text-primary-white"}>
+                        <ObsidianButton onClick={() => navigate("/Services")}>
                             Our Services
                         </ObsidianButton>
                         <ObsidianButton onClick={() => navigate("/Estimates")}>

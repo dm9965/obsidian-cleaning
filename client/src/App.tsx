@@ -22,7 +22,7 @@ function App() {
       <body
            className={"tw-w-lvw tw-overflow-y-scroll tw-flex tw-flex-col tw-justify-start"}>
            <Navigation/>
-           <div id={'fade-in'} className={"tw-flex tw-flex-col tw-w-full  tw-opacity-0 tw-transition-opacity tw-duration-500 tw-ease-in"}>
+           <div id={'fade-in'} className={"tw-flex tw-flex-col tw-w-full tw-opacity-0 tw-transition-opacity tw-duration-500 tw-ease-in"}>
               <BrowserRouter>
                  <Routes>
                     <Route path={"/"} element={<LandingPage/>}/>

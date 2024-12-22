@@ -1,4 +1,4 @@
-import {Row, Table} from "reactstrap";
+import {Table} from "reactstrap";
 import services from "../constants/services.ts";
 
 const Services = () => {

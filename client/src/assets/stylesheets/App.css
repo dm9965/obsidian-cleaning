@@ -14,7 +14,7 @@
   box-sizing: border-box;
 }
 
-p, Input, Label  {
+p, td, Input, Label  {
   font-size: .65rem;
   font-weight: normal;
   font-family: "Avenir", sans-serif;

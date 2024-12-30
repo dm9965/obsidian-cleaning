@@ -13,7 +13,6 @@ const transporter = nodemailer.createTransport({
 });
 
 /**
- * Send an email to a user.
  * @param {Object} options - Email options
  * @param {string} options.message - Email message body
  */

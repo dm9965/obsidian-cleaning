@@ -1,6 +1,6 @@
 const emailService = require('../service/EmailService');
 
-const sendEmail = async (req, res) => {
+const requestEstimate = async (req, res) => {
     try {
         const { message } = req.body;
         const { emailInfo, savedEmail } = await emailService.requestEstimate({message});
@@ -15,4 +15,6 @@ const sendEmail = async (req, res) => {
     }
 }
 
-module.exports = sendEmail;
+module.exports = {
+    requestEstimate
+};

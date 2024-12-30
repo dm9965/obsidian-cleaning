@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 require('dotenv').config();
-const { Email } = require('../database/models')
+const db = require('../database')
 
 const transporter = nodemailer.createTransport({
     host:process.env.EMAIL_HOST,
@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
 
 /**
  * @param {Object} options - Email options
- * @param {string} options.message - Email message body
+ * @param {Object} options.message - Email message body
  */
 const requestEstimate = async ({ message }) => {
     try {
@@ -27,7 +27,18 @@ const requestEstimate = async ({ message }) => {
             additionalComments,
             date
         } = message;
-        const email = await transporter.sendMail({
+
+        const createEmail = await db.Emails.create({
+            firstName,
+            lastName,
+            companyName,
+            emailAddress,
+            serviceRequested,
+            additionalComments,
+            date
+        });
+
+        const sendEmail = await transporter.sendMail({
             from: emailAddress,
             to: process.env.EMAIL_USER,
             subject: process.env.EMAIL_SUBJECT,
@@ -40,7 +51,8 @@ const requestEstimate = async ({ message }) => {
                 date
             },
         });
-        return email;
+
+        return await Promise.all([ createEmail, sendEmail ]);
     } catch (error) {
         console.error('Error sending email:', error);
         throw new Error('Failed to send email');

@@ -4,6 +4,4 @@ const router = express.Router();
 
 router.post('/send', emailController.requestEstimate);
 
-module.exports = {
-    router
-};
+module.exports = router;

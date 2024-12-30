@@ -124,9 +124,10 @@ const Estimates = () => {
                                 {dropdownLabel}
                             </DropdownToggle>
                             <DropdownMenu className={"tw-w-full"}>
-                                <DropdownItem className={"tw-text-xs"} onClick={() => selectService('Service 1')}>Service 1</DropdownItem>
-                                <DropdownItem className={"tw-text-xs"} onClick={() => selectService('Service 2')}>Service 2</DropdownItem>
-                                <DropdownItem className={"tw-text-xs"} onClick={() => selectService('Service 3')}>Service 3</DropdownItem>
+                                <DropdownItem className={"tw-text-xs"} onClick={() => selectService('Nightly Janitorial')}>Nightly Janitorial</DropdownItem>
+                                <DropdownItem className={"tw-text-xs"} onClick={() => selectService( 'Floor Stripping and Waxing')}>Floor Stripping and Waxing</DropdownItem>
+                                <DropdownItem className={"tw-text-xs"} onClick={() => selectService( 'Shipping and Receiving Cleaning')}>Shipping and Receiving Bay Cleaning</DropdownItem>
+                                <DropdownItem className={"tw-text-xs"} onClick={() => selectService('Disinfecting and Sanitization')}>Disinfecting and Sanitization</DropdownItem>
                             </DropdownMenu>
                         </Dropdown>
                         {formErrors[4] && (

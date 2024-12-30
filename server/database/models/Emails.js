@@ -8,20 +8,16 @@ module.exports = (sequelize, DataTypes) => {
                 primaryKey: true,
                 autoIncrement: true,
             },
-            to : {
+            firstName: DataTypes.STRING,
+            lastName: DataTypes.STRING,
+            companyName: DataTypes.STRING,
+            emailAddress: {
                 type: DataTypes.STRING,
-                allowNull: false,
-                validate: {
-                    isEmail: true
-                }
+                validate: { isEmail: true }
             },
-            subject: {
-                type: DataTypes.STRING,
-                allowNull: false
-            },
-            message: {
-                type: DataTypes.JSON
-            }
+            serviceRequested: DataTypes.STRING,
+            additionalComments: DataTypes.TEXT,
+            date: DataTypes.DATE
         }
     )
     Emails.sync();

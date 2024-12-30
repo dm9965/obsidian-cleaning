@@ -2,11 +2,12 @@ import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Form, FormGroup, I
 import { useState} from "react";
 import ObsidianButton from "./ObsidianButton.tsx";
 import SuccessCheck from "./SuccessCheck.tsx";
+import EmailService from "../services/EmailService.ts";
 
 const Estimates = () => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
+    const [emailAddress, setEmail] = useState("");
     const [companyName, setCompanyName] = useState("");
     const [serviceRequested, setServiceRequested] = useState("");
     const [additionalComments, setAdditionalComments] = useState("");
@@ -15,13 +16,21 @@ const Estimates = () => {
     const [formErrors, setFormErrors] = useState([]);
     const [displaySuccess, setDisplaySuccess] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const formData = [firstName, lastName, companyName, email, serviceRequested];
+        const formData = [firstName, lastName, companyName, emailAddress, serviceRequested];
         const error = validateInput(formData);
         if (!error) {
             console.log("Form submitted!");
             setDisplaySuccess(true);
+            return await EmailService.requestEstimate({
+                firstName: firstName,
+                lastName: lastName,
+                companyName: companyName,
+                emailAddress: emailAddress,
+                serviceRequested: serviceRequested,
+                additionalComments: additionalComments
+            })
         } else {
             console.warn("Error submitting form!")
         }

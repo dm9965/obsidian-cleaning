@@ -3,3 +3,6 @@ node_modules
 /server/.env
 /server/.env.local
 /server/.env.staging
+.env
+.env.local
+.env.staging

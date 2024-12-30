@@ -29,27 +29,27 @@ const requestEstimate = async ({ message }) => {
         } = message;
 
         const createEmail = await db.Emails.create({
-            firstName,
-            lastName,
-            companyName,
-            emailAddress,
-            serviceRequested,
-            additionalComments,
-            date
+            firstName: firstName,
+            lastName: lastName,
+            companyName: companyName,
+            emailAddress: emailAddress,
+            serviceRequested: serviceRequested,
+            additionalComments: additionalComments,
+            date: date
         });
 
         const sendEmail = await transporter.sendMail({
             from: emailAddress,
             to: process.env.EMAIL_USER,
             subject: process.env.EMAIL_SUBJECT,
-            text: {
-                firstName,
-                lastName,
-                companyName,
-                serviceRequested,
-                additionalComments,
-                date
-            },
+            text: `
+                First Name: ${firstName}
+                Last Name: ${lastName}
+                Company Name: ${companyName}
+                Service Requested: ${serviceRequested}
+                Additional Comments: ${additionalComments}
+                Date: ${date}
+            `
         });
 
         return await Promise.all([ createEmail, sendEmail ]);

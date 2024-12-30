@@ -1,3 +1,5 @@
 node_modules
 .idea
 /server/.env
+/server/.env.local
+/server/.env.staging

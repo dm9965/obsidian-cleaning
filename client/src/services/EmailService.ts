@@ -4,7 +4,7 @@ const EmailService = {
             credentials: "include",
             method: "POST",
             headers: new Headers({ "Content-Type" : "application/json"}),
-            body: JSON.stringify({ message })
+            body: JSON.stringify({message}),
         }).then(response => response.json())
     }
 }

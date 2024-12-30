@@ -17,7 +17,6 @@ module.exports = (sequelize, DataTypes) => {
             },
             serviceRequested: DataTypes.STRING,
             additionalComments: DataTypes.TEXT,
-            date: DataTypes.DATE
         }
     )
     Emails.sync();

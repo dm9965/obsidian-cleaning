@@ -21,24 +21,40 @@ const Estimates = () => {
         const formData = [firstName, lastName, companyName, emailAddress, serviceRequested];
         const error = validateInput(formData);
         if (!error) {
-            console.log("Form submitted!");
-            setDisplaySuccess(true);
-            return await EmailService.requestEstimate({
-                firstName: firstName,
-                lastName: lastName,
-                companyName: companyName,
-                emailAddress: emailAddress,
-                serviceRequested: serviceRequested,
-                additionalComments: additionalComments
-            })
-        } else {
-            console.warn("Error submitting form!")
+            try {
+                console.log("Form submitted!");
+                setDisplaySuccess(true);
+                return await EmailService.requestEstimate({
+                    firstName: firstName,
+                    lastName: lastName,
+                    companyName: companyName,
+                    emailAddress: emailAddress,
+                    serviceRequested: serviceRequested,
+                    additionalComments: additionalComments
+                })
+            } catch (error) {
+                console.warn(error.message)
+            }
+            resetForm();
         }
     };
 
     const toggleDropdown = () => {
         setDropdownOpen(!dropdownOpen);
-    }
+    };
+
+    const resetForm = () => {
+        setDropdownOpen(false);
+        setEmail("");
+        setFirstName("");
+        setLastName("");
+        setCompanyName("");
+        setDropdownLabel("Select a Service");
+        setServiceRequested("");
+        setAdditionalComments("");
+        setFormErrors([]);
+        setDisplaySuccess(false);
+    };
 
     const selectService = (service) => {
         setServiceRequested(service);

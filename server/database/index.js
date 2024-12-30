@@ -1,8 +1,8 @@
 const fs = require('fs')
 const path = require('path');
-const Sequelize = require('sequelize');
-
-const URI = process.env.DATABASE_URL || 'postgres://user:password@localhost:5432/database_name';
+const { Sequelize } = require("sequelize");
+const pathname = path.join(__dirname, 'models');
+const URI = `postgresql://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_SCHEMA}`
 
 const sequelize = new Sequelize(URI, {
     dialect: 'postgres',
@@ -18,9 +18,18 @@ const sequelize = new Sequelize(URI, {
 
 const db = {};
 
+sequelize
+    .authenticate()
+    .then(() => {
+        console.log('Connection has been established successfully.');
+    })
+    .catch((err) => {
+        console.error('Unable to connect to the database:', err);
+    });
+
 const basename = path.basename(__filename);
 
-fs.readdirSync(__dirname)
+fs.readdirSync(pathname)
     .filter((file) => {
         return (
             file.indexOf('.') !== 0 && // Ignore hidden files
@@ -29,7 +38,7 @@ fs.readdirSync(__dirname)
         );
     })
     .forEach((file) => {
-        const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
+        const model = require(path.join(pathname, file))(sequelize, Sequelize.DataTypes);
         db[model.name] = model;
     });
 

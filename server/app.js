@@ -1,9 +1,9 @@
 const express = require('express');
 const cors = require('cors');
-
 const app = express();
+require('dotenv').config();
 const port = process.env.PORT || 5005;
-const allowedOrigins = [process.env.CLIENT_URL, 'https://www.obsidiancleaning.com/']
+const allowedOrigins = [process.env.CLIENT_URL, 'https://www.obsidiancleaning.com/'];
 
 app.use(cors({
     origin: function(origin, callback) {
@@ -24,6 +24,6 @@ app.get('/', (request, response) => {
         info: 'Node.js, express, and Postgres api',
         throw : Error('BROKEN') // Express will catch this on its own.
     })
-})
+});
 
-app.listen(port, () => console.log(`Listening on Port ${port}!`))
+app.listen(port, () => console.log(`Listening on Port ${port}!`));

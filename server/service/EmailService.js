@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
 
 /**
  * @param {Object} options - Email options
- * @param {Object} options.message - Email message body
+ * @param {String} options.message - Email message body
  */
 const requestEstimate = async ({ message }) => {
     try {
@@ -27,7 +27,7 @@ const requestEstimate = async ({ message }) => {
             additionalComments,
             date
         } = message;
-
+        console.warn(message);
         const createEmail = await db.Emails.create({
             firstName: firstName,
             lastName: lastName,
@@ -35,16 +35,16 @@ const requestEstimate = async ({ message }) => {
             emailAddress: emailAddress,
             serviceRequested: serviceRequested,
             additionalComments: additionalComments,
-            date: date
         });
 
         const sendEmail = await transporter.sendMail({
-            from: emailAddress,
+            from: 'Obsidian Cleaning Company',
             to: process.env.EMAIL_USER,
             subject: process.env.EMAIL_SUBJECT,
             text: `
                 First Name: ${firstName}
                 Last Name: ${lastName}
+                Email Address: ${emailAddress}
                 Company Name: ${companyName}
                 Service Requested: ${serviceRequested}
                 Additional Comments: ${additionalComments}

@@ -17,8 +17,11 @@ module.exports = (sequelize, DataTypes) => {
             },
             serviceRequested: DataTypes.STRING,
             additionalComments: DataTypes.TEXT,
+            date: {
+                type: DataTypes.DATE,
+                defaultValue: DataTypes.NOW
+            }
         }
     )
-    Emails.sync();
     return Emails;
 }

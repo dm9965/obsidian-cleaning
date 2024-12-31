@@ -24,11 +24,10 @@ const requestEstimate = async ({ message }) => {
             companyName,
             emailAddress,
             serviceRequested,
-            additionalComments,
-            date
+            additionalComments
         } = message;
-        console.warn(message);
-        const createEmail = await db.Emails.create({
+
+        const saveEmail = await db.Emails.create({
             firstName: firstName,
             lastName: lastName,
             companyName: companyName,
@@ -41,18 +40,19 @@ const requestEstimate = async ({ message }) => {
             from: 'Obsidian Cleaning Company',
             to: process.env.EMAIL_USER,
             subject: process.env.EMAIL_SUBJECT,
-            text: `
-                First Name: ${firstName}
-                Last Name: ${lastName}
-                Email Address: ${emailAddress}
-                Company Name: ${companyName}
-                Service Requested: ${serviceRequested}
-                Additional Comments: ${additionalComments}
-                Date: ${date}
+            html: `
+                <div style="font-size: 16px;">
+                    <strong>First Name:</strong> ${firstName}<br/>
+                    <strong>Last Name:</strong> ${lastName}<br/>
+                    <strong>Email Address:</strong> ${emailAddress}<br/>
+                    <strong>Company Name:</strong> ${companyName}<br/>
+                    <strong>Service Requested:</strong> ${serviceRequested}<br/>
+                    <strong>Additional Comments:</strong> ${additionalComments}
+                </div>
             `
         });
 
-        return await Promise.all([ createEmail, sendEmail ]);
+        return { saveEmail, sendEmail };
     } catch (error) {
         console.error('Error sending email:', error);
         throw new Error('Failed to send email');

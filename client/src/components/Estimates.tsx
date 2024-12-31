@@ -23,7 +23,6 @@ const Estimates = () => {
         if (!error) {
             try {
                 console.log("Form submitted!");
-                setDisplaySuccess(true);
                 return await EmailService.requestEstimate({
                     firstName: firstName,
                     lastName: lastName,
@@ -35,6 +34,7 @@ const Estimates = () => {
             } catch (error) {
                 console.warn(error.message)
             }
+            setDisplaySuccess(true);
             resetForm();
         }
     };
@@ -178,7 +178,9 @@ const Estimates = () => {
                 <div className={"tw-fixed tw-top-1/4 tw-left-[33%] tw-bg-[#fff] tw-p-6 tw-border tw-border-primary-gray tw-rounded-lg"}>
                     <SuccessCheck/>
                     <p className={"tw-text-success tw-font-poppins tw-font-semibold"}>Estimate successfully submitted!</p>
-                    <ObsidianButton onClick={() => setDisplaySuccess(false)}> Close </ObsidianButton>
+                    <div className={"tw-w-full tw-flex tw-justify-center"}>
+                        <ObsidianButton onClick={() => setDisplaySuccess(false)}> Close </ObsidianButton>
+                    </div>
                 </div>
             }
         </div>

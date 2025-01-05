@@ -21,6 +21,9 @@ export default tseslint.config(
                 project: true,  // Enable project-wide type checking
             },
         },
+        env: {
+            "node": true,
+        },
         plugins: {
             'react-hooks': reactHooks,
             'react-refresh': reactRefresh,

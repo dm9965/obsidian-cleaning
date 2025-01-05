@@ -82,8 +82,13 @@ const Navigation = () => {
                        className={"hover:tw-border-b-2 hover:tw-border-b-primary-orange tw-text-[.75rem] tw-text-primary-white tw-no-underline"}>
                         Get an Estimate
                     </a>
-                    <a href={"/About"} className={"hover:tw-border-b-2 hover:tw-border-b-primary-orange tw-text-[.75rem] tw-text-primary-white tw-no-underline"}>
+                    <a href={"/About"}
+                       className={"hover:tw-border-b-2 hover:tw-border-b-primary-orange tw-text-[.75rem] tw-text-primary-white tw-no-underline"}>
                         About
+                    </a>
+                    <a href={"/Gallery"}
+                       className={"hover:tw-border-b-2 hover:tw-border-b-primary-orange tw-text-[.75rem] tw-text-primary-white tw-no-underline"}>
+                        Gallery
                     </a>
                 </div>
             </div>

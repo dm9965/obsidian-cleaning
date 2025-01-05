@@ -7,8 +7,8 @@ const About = () => {
                 <hr/>
                 <p>
                     At Obsidian Cleaning, we’re more than just a cleaning service—we’re a family-owned
-                    business dedicated to serving Rochester, NY, with integrity and care. Established in 2019 by
-                    brothers Ryan and Casey Black, our journey began with a commitment to excellence and a passion for
+                    business dedicated to serving Rochester, NY, with integrity and care. Established in 2020 by
+                    two brothers, our journey began with a commitment to excellence and a passion for
                     supporting our community.
                     <br/><br/>
                     During the height of the pandemic, we earned recognition for our unwavering dedication to safety,

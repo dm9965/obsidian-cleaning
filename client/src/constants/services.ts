@@ -1,13 +1,13 @@
 const services = [
     {
         id: 0,
-        serviceName: "Nightly Janitorial Service",
+        serviceName: "Janitorial Service",
         description: "Standard garbage collection, vacuuming, and mopping of the business premises. "
     },
     {
         id: 1,
-        serviceName: "Floor Stripping and Waxing",
-        description: "Make your floor shine like new with our floor stripping and waxing service."
+        serviceName: "Floor Maintenance",
+        description: "Make your floor shine like new with our buffing, burnishing, stripping, and waxing services."
     },
     {
         id: 2,

@@ -14,7 +14,7 @@ const Footer = () => {
                         <FaPerson className={"tw-fill-primary-orange"}/>
                     </div>
                     <div>
-                        <p className={"tw-leading-tight"}>Obsidian is a local, family-owned company since 2019. Click below to learn more!</p>
+                        <p className={"tw-leading-tight"}>Obsidian is a local, family-owned company since 2020. Click below to learn more!</p>
                     </div>
                     <ObsidianButton onClick={() => (window.location.href = "About")}>
                         About Us
@@ -28,7 +28,6 @@ const Footer = () => {
                     <div className={"tw-text-sm"}>
                         <p className={"tw-leading-tight"}>
                             Obsidian Cleaning Service <br/>
-                            P.O. Box 12345 <br/>
                             Rochester, NY 14609
                         </p>
                     </div>
@@ -49,7 +48,7 @@ const Footer = () => {
                             <FaMailBulk className={"tw-fill-primary-orange"}/>
                         </div>
                         <div>
-                            <p>ryanblack@gmail.com</p>
+                            <p>ObsidianCleaning@outlook.com</p>
                         </div>
                     </div>
                 </div>

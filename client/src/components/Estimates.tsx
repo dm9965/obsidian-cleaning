@@ -4,12 +4,14 @@ import ObsidianButton from "./ObsidianButton.tsx";
 import SuccessCheck from "./SuccessCheck.tsx";
 import EmailService from "../services/EmailService.ts";
 
+
 const Estimates = () => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [emailAddress, setEmail] = useState("");
     const [companyName, setCompanyName] = useState("");
-    const [serviceRequested, setServiceRequested] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [serviceRequested, setServiceRequested] = useState({});
     const [additionalComments, setAdditionalComments] = useState("");
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [dropdownLabel, setDropdownLabel] = useState("Select a Service");
@@ -18,19 +20,15 @@ const Estimates = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const formData = [firstName, lastName, companyName, emailAddress, serviceRequested];
+        const formData = [firstName, lastName, companyName, emailAddress, phoneNumber, serviceRequested];
         const error = validateInput(formData);
+        const message = {
+            firstName, lastName, companyName, emailAddress, phoneNumber, serviceRequested, additionalComments
+        };
         if (!error) {
             try {
                 console.log("Form submitted!");
-                return await EmailService.requestEstimate({
-                    firstName: firstName,
-                    lastName: lastName,
-                    companyName: companyName,
-                    emailAddress: emailAddress,
-                    serviceRequested: serviceRequested,
-                    additionalComments: additionalComments
-                })
+                return await EmailService.requestEstimate(message);
             } catch (error) {
                 console.warn(error.message)
             }
@@ -134,6 +132,21 @@ const Estimates = () => {
                             <p className={"tw-text-error tw-mb-0"}> Email address is required. </p>
                         )}
                     </Label>
+                    <Label className={"tw-text-xs"}>
+                        Phone: &nbsp;
+                        <Input
+                            type={"text"}
+                            placeholder={"Phone Number"}
+                            onChange={(e) => setPhoneNumber(e.target.value)}
+                            style={{
+                                fontSize:".55rem"
+                            }}
+                        />
+                        {formErrors[4] && (
+                            <p className={"tw-text-error tw-mb-0"}> Phone number is required. </p>
+                        )}
+                    </Label>
+                    {/* Allow multiple selections for dropdown, change to checkbox */}
                     <Label className="tw-text-xs tw-bg-none tw-flex tw-flex-col">
                         Service Requested: &nbsp;
                         <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown} style={{
@@ -155,7 +168,7 @@ const Estimates = () => {
                                 <DropdownItem className={"tw-text-xs"} onClick={() => selectService('Disinfecting and Sanitization')}>Disinfecting and Sanitization</DropdownItem>
                             </DropdownMenu>
                         </Dropdown>
-                        {formErrors[4] && (
+                        {formErrors[5] && (
                             <p className={"tw-text-error tw-mb-0"}> Service requested is required. </p>
                         )}
                     </Label>

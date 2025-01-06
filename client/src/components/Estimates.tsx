@@ -135,7 +135,7 @@ const Estimates = () => {
                     <Label className={"tw-text-xs"}>
                         Phone: &nbsp;
                         <Input
-                            type={"text"}
+                            type={"tel"}
                             placeholder={"Phone Number"}
                             onChange={(e) => setPhoneNumber(e.target.value)}
                             style={{

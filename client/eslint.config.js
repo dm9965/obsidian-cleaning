@@ -4,25 +4,29 @@ import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
 
+/**
+ * @type {import('eslint').Linter.FlatConfig[]}
+ */
 export default tseslint.config(
     { ignores: ['dist'] },
     {
         extends: [
             js.configs.recommended,
             ...tseslint.configs.recommended,
-            ...tseslint.configs.stylistic,  // Add stylistic rules
+            ...tseslint.configs.stylistic,
         ],
         files: ['**/*.{ts,tsx}'],
         languageOptions: {
             ecmaVersion: 2020,
-            globals: globals.browser,
+            globals: {
+                ...globals.browser,
+                ...globals.node,
+                ...globals.jest
+            },
             parser: tseslint.parser,
             parserOptions: {
-                project: true,  // Enable project-wide type checking
+                project: false,  // Change this line
             },
-        },
-        env: {
-            "node": true,
         },
         plugins: {
             'react-hooks': reactHooks,
@@ -30,19 +34,16 @@ export default tseslint.config(
             '@typescript-eslint': tseslint.plugin,
         },
         rules: {
+            'semi': ['error', 'always'],
             ...reactHooks.configs.recommended.rules,
             'react-refresh/only-export-components': [
                 'warn',
                 { allowConstantExport: true },
             ],
-            // Enforce semicolons
-            '@typescript-eslint/semi': ['error', 'always'],
-            // Enforce no unused vars/imports
             '@typescript-eslint/no-unused-vars': ['error', {
                 argsIgnorePattern: '^_',
                 varsIgnorePattern: '^_',
             }],
-            // Additional recommended rules
             '@typescript-eslint/explicit-function-return-type': 'warn',
             '@typescript-eslint/no-explicit-any': 'error',
             '@typescript-eslint/consistent-type-imports': 'error',

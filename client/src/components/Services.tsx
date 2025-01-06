@@ -29,7 +29,7 @@ const Services = () => {
             </tbody>
             </Table>
         </div>
-    )
-}
+    );
+};
 
 export default Services;

@@ -1,5 +1,5 @@
 import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Form, FormGroup, Input, Label} from "reactstrap";
-import { useState} from "react";
+import React, { useState} from "react";
 import ObsidianButton from "./ObsidianButton.tsx";
 import SuccessCheck from "./SuccessCheck.tsx";
 import EmailService from "../services/EmailService.ts";
@@ -30,7 +30,7 @@ const Estimates = () => {
                 console.log("Form submitted!");
                 return await EmailService.requestEstimate(message);
             } catch (error) {
-                console.warn(error.message)
+                console.warn(error.message);
             }
             setDisplaySuccess(true);
             resetForm();
@@ -58,7 +58,7 @@ const Estimates = () => {
         setServiceRequested(service);
         setDropdownLabel(service);
         setDropdownOpen(false);
-    }
+    };
 
     const validateInput = (formData) => {
         const errors = formData.map((input) => input === "" || input === "Select a Service");
@@ -197,7 +197,7 @@ const Estimates = () => {
                 </div>
             }
         </div>
-    )
-}
+    );
+};
 
 export default Estimates;

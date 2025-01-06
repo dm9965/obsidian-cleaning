@@ -5,7 +5,7 @@ const key = import.meta.env.VITE_SUPABASE_KEY;
 const supabase = createClient(supabase_url, key);
 
 const EmailService = {
-    requestEstimate: async (message: Object) => {
+    requestEstimate: async (message: object) => {
         const {
             firstName,
             lastName,
@@ -25,6 +25,6 @@ const EmailService = {
             additionalComments: additionalComments
         }]);
     }
-}
+};
 
 export default EmailService;

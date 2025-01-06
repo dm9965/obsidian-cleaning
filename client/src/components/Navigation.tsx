@@ -1,14 +1,14 @@
 import Logo from "../assets/images/ObsidianNew.png";
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { FaPhone } from "react-icons/fa";
-import {Collapse, Nav, Navbar, NavbarToggler, NavItem} from "reactstrap";
+import {Collapse, Nav, Navbar, NavbarToggler} from "reactstrap";
 import {useState} from "react";
 
 const Navigation = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const toggleNav = () => {
         setMenuOpen(!menuOpen);
-    }
+    };
 
     // const navigate = useNavigate();
 
@@ -93,7 +93,7 @@ const Navigation = () => {
                 </div>
             </div>
         </Navbar>
-    )
-}
+    );
+};
 
 export default Navigation;

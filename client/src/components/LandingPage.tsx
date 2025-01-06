@@ -10,6 +10,7 @@ const LandingPage = () => {
     const navigate = useNavigate();
 
     return (
+        <>
         <div className={"tw-flex tw-flex-col tw-justify-between tw-h-full"}>
             <div className={"tw-relative"}>
                 <img src={Stock} className={"tw-w-full tw-brightness-75"}/>
@@ -73,7 +74,8 @@ const LandingPage = () => {
                 </p>
             </div>
         </div>
-    )
-}
+        </>
+    );
+};
 
 export default LandingPage;

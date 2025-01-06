@@ -29,7 +29,8 @@
     //absolute import
     "baseUrl": "./src",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "react": ["node_modules/@types/react"]
     }
   },
   "include": ["src", "./jest.setup.ts"],

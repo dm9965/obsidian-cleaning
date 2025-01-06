@@ -56,7 +56,7 @@ const Footer = () => {
             <hr/>
             <p className={"tw-text-center tw-text-xs"}> &copy; All Rights Reserved. Obsidian Cleaning Service.</p>
         </div>
-    )
-}
+    );
+};
 
 export default Footer;

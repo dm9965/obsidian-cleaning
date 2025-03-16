@@ -1,70 +1,114 @@
-import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Form, FormGroup, Input, Label} from "reactstrap";
-import React, { useState} from "react";
+import {Form, FormGroup, Input, Label} from "reactstrap";
+import React, {useEffect, useState} from "react";
 import ObsidianButton from "./ObsidianButton.tsx";
 import SuccessCheck from "./SuccessCheck.tsx";
 import EmailService from "../services/EmailService.ts";
-
+import {useSanitizeEmail, useSanitizeInput, useSanitizePhone} from "../constants/Sanitize.ts";
 
 const Estimates = () => {
+
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [emailAddress, setEmail] = useState("");
     const [companyName, setCompanyName] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
-    const [serviceRequested, setServiceRequested] = useState({});
+    const [serviceRequested, setServiceRequested] = useState([]);
     const [additionalComments, setAdditionalComments] = useState("");
-    const [dropdownOpen, setDropdownOpen] = useState(false);
-    const [dropdownLabel, setDropdownLabel] = useState("Select a Service");
     const [formErrors, setFormErrors] = useState([]);
     const [displaySuccess, setDisplaySuccess] = useState(false);
+    const [emailError, setEmailError] = useState("");
+    const [phoneError, setPhoneError] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const formData = [firstName, lastName, companyName, emailAddress, phoneNumber, serviceRequested];
-        const error = validateInput(formData);
-        const message = {
-            firstName, lastName, companyName, emailAddress, phoneNumber, serviceRequested, additionalComments
-        };
-        if (!error) {
-            try {
-                console.log("Form submitted!");
-                return await EmailService.requestEstimate(message);
-            } catch (error) {
-                console.warn(error.message);
-            }
-            setDisplaySuccess(true);
-            resetForm();
+    const handleInputChange = (setter, index, validator) => (e) => {
+        const value = useSanitizeInput(e.target.value.trim());
+        setter(value);
+
+        if (validator && !validator(value)) {
+            setFormErrors((prev) => {
+                let errors = [...prev];
+                errors[index] = true;
+                return errors;
+            });
+        } else {
+            setFormErrors((prev) => {
+                let errors = [...prev];
+                errors[index] = false;
+                return errors;
+            });
         }
     };
 
-    const toggleDropdown = () => {
-        setDropdownOpen(!dropdownOpen);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (isSubmitting) return;
+
+        setIsSubmitting(true);
+        setEmailError("");
+        setPhoneError("");
+
+        let newFormErrors = [!firstName, !lastName, !companyName, !emailAddress, !phoneNumber, !serviceRequested];
+        let hasError = newFormErrors.includes(true);
+
+        if (!emailAddress) {
+            newFormErrors[3] = true;
+            setEmailError("Email address is required.");
+            hasError = true;
+        }
+
+        if (emailAddress && !useSanitizeEmail(emailAddress)) {
+            newFormErrors[3] = true;
+            setEmailError("Please enter a valid email address.");
+            hasError = true;
+        }
+
+        if (!phoneNumber) {
+            newFormErrors[4] = true;
+            setPhoneError("Phone number is required.");
+            hasError = true;
+        }
+
+        if (phoneNumber && !useSanitizePhone(phoneNumber)) {
+            newFormErrors[4] = true;
+            setPhoneError("Please enter a valid phone number.");
+            hasError = true;
+        }
+
+        if (serviceRequested.length === 0) {
+            newFormErrors[5] = true;
+            hasError = true;
+        }
+
+        setFormErrors(newFormErrors);
+
+        if (!hasError) {
+            try {
+                await EmailService.requestEstimate({ firstName, lastName, companyName, emailAddress, phoneNumber, serviceRequested, additionalComments });
+                setDisplaySuccess(true);
+                resetForm();
+            } catch (error) {
+                console.warn(error.message);
+            }
+        }
+        setIsSubmitting(false);
     };
 
     const resetForm = () => {
-        setDropdownOpen(false);
         setEmail("");
         setFirstName("");
         setLastName("");
         setCompanyName("");
-        setDropdownLabel("Select a Service");
-        setServiceRequested("");
+        setPhoneNumber("");
+        setServiceRequested([]);
         setAdditionalComments("");
         setFormErrors([]);
         setDisplaySuccess(false);
     };
 
     const selectService = (service) => {
-        setServiceRequested(service);
-        setDropdownLabel(service);
-        setDropdownOpen(false);
-    };
-
-    const validateInput = (formData) => {
-        const errors = formData.map((input) => input === "" || input === "Select a Service");
-        const hasError = errors.some((error) => error);
-        setFormErrors(errors);
-        return hasError;
+        setServiceRequested((prevServices) =>
+            prevServices.includes(service) ? prevServices.filter(s => s !== service) : [...prevServices, service]
+        );
     };
 
     return (
@@ -79,9 +123,10 @@ const Estimates = () => {
                     <Label className={"tw-text-xs"}>
                         First Name: &nbsp;
                         <Input
+                            value={firstName}
                             type={"text"}
                             placeholder={"First Name"}
-                            onChange={(e) => setFirstName(e.target.value)}
+                            onChange={handleInputChange(setFirstName, 0, null)}
                             style={{
                                 fontSize:".55rem"
                             }}
@@ -93,9 +138,10 @@ const Estimates = () => {
                     <Label className={"tw-text-xs"}>
                         Last Name: &nbsp;
                         <Input
+                            value={lastName}
                             type={"text"}
                             placeholder={"Last Name"}
-                            onChange={(e) => setLastName(e.target.value)}
+                            onChange={handleInputChange(setLastName, 1, null)}
                             style={{
                                 fontSize:".55rem"
                             }}
@@ -108,8 +154,9 @@ const Estimates = () => {
                         Company Name: &nbsp;
                         <Input
                             type={"text"}
+                            value={companyName}
                             placeholder={"Company Name"}
-                            onChange={(e) => setCompanyName(e.target.value)}
+                            onChange={handleInputChange(setCompanyName, 2, null)}
                             style={{
                                 fontSize:".55rem"
                             }}
@@ -122,52 +169,71 @@ const Estimates = () => {
                         Email: &nbsp;
                         <Input
                             type={"text"}
+                            value={emailAddress}
                             placeholder={"Email Address"}
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={handleInputChange(setEmail, 3, useSanitizeEmail)}
                             style={{
                                 fontSize:".55rem"
                             }}
                         />
                         {formErrors[3] && (
-                            <p className={"tw-text-error tw-mb-0"}> Email address is required. </p>
+                            <p className={"tw-text-error tw-mb-0"}> {emailError} </p>
                         )}
                     </Label>
                     <Label className={"tw-text-xs"}>
                         Phone: &nbsp;
                         <Input
+                            value={phoneNumber}
                             type={"tel"}
                             placeholder={"Phone Number"}
-                            onChange={(e) => setPhoneNumber(e.target.value)}
+                            onChange={handleInputChange(setPhoneNumber, 4, useSanitizePhone)}
                             style={{
                                 fontSize:".55rem"
                             }}
                         />
                         {formErrors[4] && (
-                            <p className={"tw-text-error tw-mb-0"}> Phone number is required. </p>
+                            <p className={"tw-text-error tw-mb-0"}> {phoneError} </p>
                         )}
                     </Label>
                     {/* Allow multiple selections for dropdown, change to checkbox */}
                     <Label className="tw-text-xs tw-bg-none tw-flex tw-flex-col">
-                        Service Requested: &nbsp;
-                        <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown} style={{
-                            fontSize:".55rem"
-                        }}>
-                            <DropdownToggle
-                                caret
-                                className="tw-w-full tw-border-b tw-border-b-primary-orange tw-text-primary-black tw-flex tw-justify-between"
-                                style={{
-                                    fontSize:".55rem"
-                                }}
-                            >
-                                {dropdownLabel}
-                            </DropdownToggle>
-                            <DropdownMenu className={"tw-w-full"}>
-                                <DropdownItem className={"tw-text-xs"} onClick={() => selectService('Nightly Janitorial')}>Nightly Janitorial</DropdownItem>
-                                <DropdownItem className={"tw-text-xs"} onClick={() => selectService( 'Floor Stripping and Waxing')}>Floor Stripping and Waxing</DropdownItem>
-                                <DropdownItem className={"tw-text-xs"} onClick={() => selectService( 'Shipping and Receiving Cleaning')}>Shipping and Receiving Bay Cleaning</DropdownItem>
-                                <DropdownItem className={"tw-text-xs"} onClick={() => selectService('Disinfecting and Sanitization')}>Disinfecting and Sanitization</DropdownItem>
-                            </DropdownMenu>
-                        </Dropdown>
+                        Service(s) Requested: &nbsp;
+                        <div className={"tw-grid tw-grid-cols-2"}>
+                            <FormGroup check inline>
+                                <Input
+                                    className={"tw-text-xs"}
+                                    type={"checkbox"}
+                                    checked={serviceRequested.includes("Nightly Janitorial")}
+                                    onChange={() => selectService('Nightly Janitorial')}
+                                />
+                                <Label check>Nightly Janitorial</Label>
+                            </FormGroup>
+                            <FormGroup check inline>
+                                <Input
+                                    className={"tw-text-xs"}
+                                    type={"checkbox"}
+                                    checked={serviceRequested.includes("Floor Stripping and Waxing")}
+                                    onChange={() => selectService( 'Floor Stripping and Waxing')}
+                                />
+                                <Label check>Floor Stripping & Waxing</Label>
+                            </FormGroup>
+                            <FormGroup check inline>
+                                <Input
+                                    className={"tw-text-xs"}
+                                    type={"checkbox"}
+                                    checked={serviceRequested.includes("Shipping and Receiving Cleaning")}
+                                    onChange={() => selectService( 'Shipping and Receiving Cleaning')}/>
+                                <Label check>Shipping & Receiving</Label>
+                            </FormGroup>
+                            <FormGroup check inline>
+                                <Input
+                                    className={"tw-text-xs"}
+                                    type={"checkbox"}
+                                    checked={serviceRequested.includes("Disinfecting and Sanitization")}
+                                    onChange={() => selectService('Disinfecting and Sanitization')}/>
+                                <Label check>Disinfecting and Sanitization</Label>
+                            </FormGroup>
+                        </div>
                         {formErrors[5] && (
                             <p className={"tw-text-error tw-mb-0"}> Service requested is required. </p>
                         )}
@@ -182,7 +248,9 @@ const Estimates = () => {
                     </Label>
                     <ObsidianButton
                         onClick={(e) => handleSubmit(e)}
-                        type={"submit"}>
+                        type={"submit"}
+                        disabled={formErrors}
+                    >
                         Submit Estimate Request
                     </ObsidianButton>
                 </FormGroup>

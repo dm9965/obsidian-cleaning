@@ -15,13 +15,14 @@ const EmailService = {
             serviceRequested,
             additionalComments
         } = message;
+        const services = serviceRequested.join(", ");
         return supabase.from('Emails').insert([{
             firstName: firstName,
             lastName: lastName,
             companyName: companyName,
             phoneNumber: phoneNumber,
             emailAddress: emailAddress,
-            serviceRequested: serviceRequested,
+            serviceRequested: services,
             additionalComments: additionalComments
         }]);
     }

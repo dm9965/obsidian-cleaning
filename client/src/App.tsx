@@ -8,6 +8,7 @@ import About from './components/About.tsx';
 import Services from './components/Services.tsx';
 import Footer from './components/Footer.tsx';
 import { useEffect } from 'react';
+import Gallery from "./components/Gallery.tsx";
 
 function App() {
     useEffect(() => {
@@ -32,6 +33,7 @@ function App() {
                         <Route path="/Services" element={<Services />} />
                         <Route path="/About" element={<About />} />
                         <Route path="/Estimates" element={<Estimates />} />
+                        <Route path={"/Gallery"} element={<Gallery />} />
                     </Routes>
                 </Router>
             </div>

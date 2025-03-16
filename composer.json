@@ -1,13 +1,6 @@
 {
-  "name": "obsidian-cleaning/website",
+  "name": "obsidian-cleaning/root",
   "version": "1.0.0",
-  "repositories": [
-      {
-        "type": "vcs",
-        "url": "https://github.com/dm9965/obsidian-cleaning"
-      }
-  ],
-  "require": {
-    "obsidian-cleaning/client": "dev-master"
-  }
+  "require": {},
+  "require-dev": {}
 }

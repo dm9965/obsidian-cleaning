@@ -1,11 +1,6 @@
 {
-  "name": "obsidian-cleaning/client",
+  "name": "obsidian-cleaning/website",
   "version": "1.0.0",
-  "repositories": [
-    {
-      "type": "path",
-      "url": "./client"
-    }
-  ],
-  "require": {}
+  "require": {},
+  "require-dev": {}
 }

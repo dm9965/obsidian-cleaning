@@ -4,6 +4,13 @@ import ObsidianButton from "./ObsidianButton.tsx";
 import SuccessCheck from "./SuccessCheck.tsx";
 import EmailService from "../services/EmailService.ts";
 import {useSanitizeEmail, useSanitizeInput, useSanitizePhone} from "../constants/Sanitize.ts";
+import {
+    EMAIL_REQUIRED, PHONE_REQUIRED, INVALID_EMAIL,
+    INVALID_PHONE, EMAIL_EXISTS, UNEXPECTED_ERROR,
+    FIRST_NAME_REQUIRED, LAST_NAME_REQUIRED, SERVICE_REQUIRED,
+    COMPANY_REQUIRED, DISINFECTING, SHIPPING,
+    FLOORS, JANITORIAL, SUBMIT_ESTIMATE, SUCCESSFUL_SUBMISSION
+} from "../constants/Strings.ts";
 
 const Estimates = () => {
 
@@ -18,9 +25,8 @@ const Estimates = () => {
     const [displaySuccess, setDisplaySuccess] = useState(false);
     const [emailError, setEmailError] = useState("");
     const [phoneError, setPhoneError] = useState("");
-    const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleInputChange = (setter, index, validator) => (e) => {
+    const handleInputChange = (setter: any, index: number, validator: any) => (e) => {
         const value = useSanitizeInput(e.target.value.trim());
         setter(value);
 
@@ -41,9 +47,7 @@ const Estimates = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (isSubmitting) return;
 
-        setIsSubmitting(true);
         setEmailError("");
         setPhoneError("");
 
@@ -52,25 +56,25 @@ const Estimates = () => {
 
         if (!emailAddress) {
             newFormErrors[3] = true;
-            setEmailError("Email address is required.");
+            setEmailError(EMAIL_REQUIRED);
             hasError = true;
         }
 
         if (emailAddress && !useSanitizeEmail(emailAddress)) {
             newFormErrors[3] = true;
-            setEmailError("Please enter a valid email address.");
+            setEmailError(INVALID_EMAIL);
             hasError = true;
         }
 
         if (!phoneNumber) {
             newFormErrors[4] = true;
-            setPhoneError("Phone number is required.");
+            setPhoneError(PHONE_REQUIRED);
             hasError = true;
         }
 
         if (phoneNumber && !useSanitizePhone(phoneNumber)) {
             newFormErrors[4] = true;
-            setPhoneError("Please enter a valid phone number.");
+            setPhoneError(INVALID_PHONE);
             hasError = true;
         }
 
@@ -83,14 +87,28 @@ const Estimates = () => {
 
         if (!hasError) {
             try {
-                await EmailService.requestEstimate({ firstName, lastName, companyName, emailAddress, phoneNumber, serviceRequested, additionalComments });
-                setDisplaySuccess(true);
+                const response = await EmailService.requestEstimate({
+                    firstName,
+                    lastName,
+                    companyName,
+                    emailAddress,
+                    phoneNumber,
+                    serviceRequested,
+                    additionalComments
+                });
+                if (response.error) {
+                    throw response.error;
+                }
+                alert(SUCCESSFUL_SUBMISSION);
                 resetForm();
             } catch (error) {
-                console.warn(error.message);
+                if (error.status === 409 || error.message.includes("duplicate key")) {
+                    alert(EMAIL_EXISTS);
+                } else {
+                    alert(UNEXPECTED_ERROR);
+                }
             }
         }
-        setIsSubmitting(false);
     };
 
     const resetForm = () => {
@@ -132,7 +150,7 @@ const Estimates = () => {
                             }}
                         />
                         {formErrors[0] && (
-                            <p className={"tw-text-error tw-mb-0"}> First name is required. </p>
+                            <p className={"tw-text-error tw-mb-0"}> {FIRST_NAME_REQUIRED} </p>
                         )}
                     </Label>
                     <Label className={"tw-text-xs"}>
@@ -147,7 +165,7 @@ const Estimates = () => {
                             }}
                         />
                         {formErrors[1] && (
-                            <p className={"tw-text-error tw-mb-0"}> Last name is required </p>
+                            <p className={"tw-text-error tw-mb-0"}> {LAST_NAME_REQUIRED} </p>
                         )}
                     </Label>
                     <Label className={"tw-text-xs"}>
@@ -162,7 +180,7 @@ const Estimates = () => {
                             }}
                         />
                         {formErrors[2] && (
-                            <p className={"tw-text-error tw-mb-0"}> Company name is required. </p>
+                            <p className={"tw-text-error tw-mb-0"}> {COMPANY_REQUIRED} </p>
                         )}
                     </Label>
                     <Label className={"tw-text-xs"}>
@@ -206,36 +224,36 @@ const Estimates = () => {
                                     checked={serviceRequested.includes("Nightly Janitorial")}
                                     onChange={() => selectService('Nightly Janitorial')}
                                 />
-                                <Label check>Nightly Janitorial</Label>
+                                <Label check>{JANITORIAL}</Label>
                             </FormGroup>
                             <FormGroup check inline>
                                 <Input
                                     className={"tw-text-xs"}
                                     type={"checkbox"}
-                                    checked={serviceRequested.includes("Floor Stripping and Waxing")}
-                                    onChange={() => selectService( 'Floor Stripping and Waxing')}
+                                    checked={serviceRequested.includes(FLOORS)}
+                                    onChange={() => selectService( FLOORS)}
                                 />
-                                <Label check>Floor Stripping & Waxing</Label>
+                                <Label check>{FLOORS}</Label>
                             </FormGroup>
                             <FormGroup check inline>
                                 <Input
                                     className={"tw-text-xs"}
                                     type={"checkbox"}
-                                    checked={serviceRequested.includes("Shipping and Receiving Cleaning")}
-                                    onChange={() => selectService( 'Shipping and Receiving Cleaning')}/>
-                                <Label check>Shipping & Receiving</Label>
+                                    checked={serviceRequested.includes(SHIPPING)}
+                                    onChange={() => selectService( SHIPPING)}/>
+                                <Label check>{SHIPPING}</Label>
                             </FormGroup>
                             <FormGroup check inline>
                                 <Input
                                     className={"tw-text-xs"}
                                     type={"checkbox"}
-                                    checked={serviceRequested.includes("Disinfecting and Sanitization")}
-                                    onChange={() => selectService('Disinfecting and Sanitization')}/>
-                                <Label check>Disinfecting and Sanitization</Label>
+                                    checked={serviceRequested.includes(DISINFECTING)}
+                                    onChange={() => selectService(DISINFECTING)}/>
+                                <Label check>{DISINFECTING}</Label>
                             </FormGroup>
                         </div>
                         {formErrors[5] && (
-                            <p className={"tw-text-error tw-mb-0"}> Service requested is required. </p>
+                            <p className={"tw-text-error tw-mb-0"}> {SERVICE_REQUIRED} </p>
                         )}
                     </Label>
                     <Label className={"tw-flex tw-flex-col"}>
@@ -251,7 +269,7 @@ const Estimates = () => {
                         type={"submit"}
                         disabled={formErrors}
                     >
-                        Submit Estimate Request
+                        {SUBMIT_ESTIMATE}
                     </ObsidianButton>
                 </FormGroup>
             </Form>

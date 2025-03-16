@@ -3,7 +3,7 @@ name: Generate Build on Push
 on:
   push:
     branches:
-      - prod
+      - main
 
 jobs:
   build:
@@ -23,8 +23,8 @@ jobs:
         uses: s0/git-publish-subdir-action@develop
         env:
           REPO: self
-          BRANCH: main
-          FOLDER: main
+          BRANCH: prod
+          FOLDER: prod
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VITE_SUPABASE_KEY: ${{ secrets.VITE_SUPABASE_KEY }}
           VITE_SUPABASE_PROJECT:  ${{ secrets.VITE_SUPABASE_PROJECT }}

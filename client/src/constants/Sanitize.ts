@@ -3,7 +3,6 @@ import {emailRegex, phoneRegex} from "./RegexTest.ts";
 
 const allowedTags = ['b', 'i', 'strong', 'em']; // Allow only essential formatting
 const allowedAttributes = { }; // Disallow all attributes
-const disallowedSchemes = ['javascript', 'data', 'vbscript'];
 
 export const useSanitizeInput = (input: string) => {
     const cleaned = sanitizeHtml(input, {

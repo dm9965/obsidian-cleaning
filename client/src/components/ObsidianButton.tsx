@@ -1,6 +1,11 @@
 import PropTypes from "prop-types";
 
-const ObsidianButton = (props) => {
+const ObsidianButton = (props: {
+    onClick: any,
+    type?: "submit" | "reset" | "button",
+    style?: string,
+    children: any,
+}) => {
     const {
         onClick,
         type,

@@ -1,5 +1,5 @@
 import {Form, FormGroup, Input, Label} from "reactstrap";
-import React, {useEffect, useState} from "react";
+import {useState} from "react";
 import ObsidianButton from "./ObsidianButton.tsx";
 import SuccessCheck from "./SuccessCheck.tsx";
 import EmailService from "../services/EmailService.ts";
@@ -14,19 +14,19 @@ import {
 
 const Estimates = () => {
 
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [emailAddress, setEmail] = useState("");
-    const [companyName, setCompanyName] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
-    const [serviceRequested, setServiceRequested] = useState([]);
-    const [additionalComments, setAdditionalComments] = useState("");
-    const [formErrors, setFormErrors] = useState([]);
-    const [displaySuccess, setDisplaySuccess] = useState(false);
-    const [emailError, setEmailError] = useState("");
-    const [phoneError, setPhoneError] = useState("");
+    const [firstName, setFirstName] = useState<string>("");
+    const [lastName, setLastName] = useState<string>("");
+    const [emailAddress, setEmail] = useState<string>("");
+    const [companyName, setCompanyName] = useState<string>("");
+    const [phoneNumber, setPhoneNumber] = useState<string>("");
+    const [serviceRequested, setServiceRequested] = useState<string[]>([]);
+    const [additionalComments, setAdditionalComments] = useState<string>("");
+    const [formErrors, setFormErrors] = useState<boolean[]>([]);
+    const [displaySuccess, setDisplaySuccess] = useState<boolean>(false);
+    const [emailError, setEmailError] = useState<string>("");
+    const [phoneError, setPhoneError] = useState<string>("");
 
-    const handleInputChange = (setter: any, index: number, validator: any) => (e) => {
+    const handleInputChange = (setter: any, index: number, validator: any) => (e: any) => {
         const value = useSanitizeInput(e.target.value.trim());
         setter(value);
 
@@ -45,7 +45,7 @@ const Estimates = () => {
         }
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
 
         setEmailError("");
@@ -101,7 +101,7 @@ const Estimates = () => {
                 }
                 alert(SUCCESSFUL_SUBMISSION);
                 resetForm();
-            } catch (error) {
+            } catch (error: any) {
                 if (error.status === 409 || error.message.includes("duplicate key")) {
                     alert(EMAIL_EXISTS);
                 } else {
@@ -123,8 +123,8 @@ const Estimates = () => {
         setDisplaySuccess(false);
     };
 
-    const selectService = (service) => {
-        setServiceRequested((prevServices) =>
+    const selectService = (service: string) => {
+        setServiceRequested((prevServices: string[]) =>
             prevServices.includes(service) ? prevServices.filter(s => s !== service) : [...prevServices, service]
         );
     };
@@ -265,9 +265,8 @@ const Estimates = () => {
                         />
                     </Label>
                     <ObsidianButton
-                        onClick={(e) => handleSubmit(e)}
+                        onClick={(e: any) => handleSubmit(e)}
                         type={"submit"}
-                        disabled={formErrors}
                     >
                         {SUBMIT_ESTIMATE}
                     </ObsidianButton>

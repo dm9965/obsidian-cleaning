@@ -4,8 +4,18 @@ const supabase_url = `https://${import.meta.env.VITE_SUPABASE_PROJECT}.supabase.
 const key = import.meta.env.VITE_SUPABASE_KEY;
 const supabase = createClient(supabase_url, key);
 
+interface Message {
+    firstName: string;
+    lastName: string;
+    companyName: string;
+    phoneNumber: string;
+    emailAddress: string;
+    serviceRequested: string[]; // Assuming it's an array of services
+    additionalComments: string;
+}
+
 const EmailService = {
-    requestEstimate: async (message: object) => {
+    requestEstimate: async (message: Message) => {
         const {
             firstName,
             lastName,
@@ -15,7 +25,9 @@ const EmailService = {
             serviceRequested,
             additionalComments
         } = message;
+
         const services = serviceRequested.join(", ");
+
         return supabase.from('Emails').insert([{
             firstName: firstName,
             lastName: lastName,

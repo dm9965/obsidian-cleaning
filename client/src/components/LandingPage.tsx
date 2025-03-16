@@ -16,7 +16,7 @@ const LandingPage = () => {
                 <img src={Stock} className={"tw-w-full tw-brightness-75"}/>
                 <div className={"tw-absolute tw-left-10 xs:tw-top-7 md:tw-top-20 tw-font-poppins"}>
                     <h3 className={"tw-font-bold tw-w-3/5 tw-text-primary-white tw-pb-3 xs:tw-text-md"}> Professional Cleaning Service since 2019 </h3>
-                    <ObsidianButton> Get Started </ObsidianButton>
+                    <ObsidianButton onClick={() => navigate("/Estimates")}> Get Started </ObsidianButton>
                 </div>
             </div>
             <div className={"tw-flex tw-flex-row tw-py-3 tw-text-primary-dark-blue tw-font-poppins"}>

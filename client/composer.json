@@ -1,0 +1,11 @@
+{
+  "name": "obsidian-cleaning/client",
+  "version": "1.0.0",
+  "repositories": [
+    {
+      "type": "path",
+      "url": "./client"
+    }
+  ],
+  "require": {}
+}

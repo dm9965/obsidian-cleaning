@@ -19,7 +19,6 @@ function App() {
             }, 100);
         }
     }, []);
-
     return (
         <div className="tw-w-lvw tw-h-lvh tw-align-middle tw-justify-start tw-overflow-y-scroll tw-flex tw-flex-col">
             <Navigation />

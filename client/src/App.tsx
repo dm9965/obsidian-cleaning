@@ -25,7 +25,7 @@ function App() {
             <Navigation />
             <div
                 id="fade-in"
-                className="tw-flex tw-flex-col tw-w-full tw-opacity-0 tw-transition-opacity tw-duration-500 tw-ease-in"
+                className="tw-flex tw-flex-col tw-w-full tw-opacity-0 tw-transition-opacity tw-duration-500 tw-ease-in xs:tw-min-h-[40rem] md:tw-h-full xs:tw-overflow-y-scroll md:tw-overflow-hidden"
             >
                 <Router>
                     <Routes>

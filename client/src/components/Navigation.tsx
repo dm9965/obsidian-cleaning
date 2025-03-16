@@ -38,8 +38,9 @@ const Navigation = () => {
                         <NavbarToggler
                             style={{
                                 position: "absolute",
-                                right: "1rem", // Adjust based on your design
-                                top: "1rem",   // Adjust based on your design
+                                right: "1rem",
+                                top: "1rem",
+                                filter: "brightness(0) invert(1)"
                             }}
                             onClick={toggleNav}
                             navbar

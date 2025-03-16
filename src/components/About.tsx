@@ -29,8 +29,7 @@ const About = () => {
                     Corps. Their military background instilled in them the values of discipline, attention to detail,
                     and unwavering commitment — qualities that they bring to every cleaning project. With a shared
                     mission to serve their community, they’ve built a business rooted in integrity, professionalism, and
-                    a
-                    dedication to excellence.
+                    a dedication to excellence.
                 </p>
                 <h3 className={"tw-font-bold tw-font-poppins tw-text-md"}>Looking to the Future</h3>
                 <hr/>

@@ -24,7 +24,7 @@ jobs:
         env:
           REPO: self
           BRANCH: prod
-          FOLDER: prod
+          FOLDER: dist
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VITE_SUPABASE_KEY: ${{ secrets.VITE_SUPABASE_KEY }}
           VITE_SUPABASE_PROJECT:  ${{ secrets.VITE_SUPABASE_PROJECT }}
